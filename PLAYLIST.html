@@ -1,0 +1,78 @@
+<html>
+<head>
+    <title>my playlist</title>
+    <style>
+        #playlist{
+            list-style: none;
+        }
+        #playlist li a{
+            color:black;
+            text-decoration: none;
+        }
+        #playlist .current-song a{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <audio src="" controls id="audioPlayer">
+        sorry your browser does not support html5!
+    </audio>
+    <ul id="playlist">
+        <li><a href="/home/andreas/Desktop/intro.html/calm down.mp3">calm down</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/chainsmockers.mp3">Don't let me down</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/cough.mp3">Bigah-Cough</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/death bed.mp3.mp3">Death bed</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/duduke.mp3">Duduke</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/girlfriend.mp3">girlfriend</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/happier.mp3">Bestille-happier</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/home.mp3">Nothing feels like home</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/human.mp3">Human</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/island.mp3">island in the streams</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/last last.mp3">Last last</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/mess.mp3">i,m a mess</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/mockingbird.mp3">Mockingbird</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/mood.mp3">Mood</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/pill.mp3">i took pill in ibiza</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/poco loco.mp3">un poco loco</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/rio.mp3">rio</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/rush.mp3">Rush</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/shaggy.mp3">It wasn't Me</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/sugarcane.mp3">sugarcane</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/westlife.mp3">I Wanna Grow Old with You</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/whoopty.mp3">whoopty</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/Buga.mp3"></a>buga</li>
+        <li><a href="/home/andreas/Desktop/intro.html/alcohol.mp3">Alcohol</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/alone.mp3">Alone</a></li>
+        <li><a href="/home/andreas/Desktop/intro.html/bandana.mp3">Bandana</a></li>
+    </ul>
+    <script src="https://code.jquery.com/jquery-2.2.0.js"></script>
+    <script>
+        audioPlayer();
+        function audioPlayer() {
+            var currentSong = 0;
+            $("#audioPlayer")[0].src = $("#playlist li a")[0].href;
+            $("#audioPlayer")[0].play();
+            $("#playlist li a").click(function(e) {
+                e.preventDefault();
+                $("#audioPlayer")[0].src = $(this).attr('href');
+                $("#audioPlayer")[0].play();
+                $("#playlist li").removeClass("current-song");
+                currentSong = $(this).parent().index();
+                $(this).parent().addClass("current-song");
+            });
+
+            $("#audioPlayer")[0].addEventListener("ended", function() {
+                currentSong++;
+                if(currentSong == $("#playlist li a").length)
+                    currentSong = 0;
+                $("#playlist li").removeClass("current-song");
+                $("#playlist li:eq("+currentSong+")").addClass("current-song");
+                $("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+                $("#audioPlayer")[0].play();
+            });
+        }
+    </script>
+</body>
+</html>
+
